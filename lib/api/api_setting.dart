@@ -5,5 +5,6 @@ class ApiSetting {
   static const _apiUrl = _baseUrl + "api/" ;
 
   static const users = _apiUrl + 'users' ;
+  static const categories = _apiUrl + 'categories';
 
 }

@@ -1,3 +1,4 @@
+import 'package:elancer_api/screens/categories_screen.dart';
 import 'package:elancer_api/screens/users_screen.dart';
 import 'package:flutter/material.dart';
 
@@ -16,6 +17,7 @@ class MyApp extends StatelessWidget {
       initialRoute: '/users_screen',
       routes: {
         '/users_screen' : (context) =>const UsersScreen(),
+        '/categories_screen' : (context) =>const CategoriesScreen(),
       },
 
     );

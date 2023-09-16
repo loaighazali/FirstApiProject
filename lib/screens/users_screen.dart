@@ -27,6 +27,14 @@ class _UsersScreenState extends State<UsersScreen> {
       appBar:  AppBar(
         title:const Text('Users'),
         centerTitle: true,
+        actions: [
+          IconButton(
+              onPressed: (){
+                Navigator.pushNamed(context, '/categories_screen');
+              },
+              icon:const Icon(Icons.category),
+          ),
+        ],
       ),
 
       body: FutureBuilder<List<User>>(
