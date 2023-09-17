@@ -1,3 +1,6 @@
+import 'package:elancer_api/api/controllers/auth_api_controller.dart';
+import 'package:elancer_api/helpers/helpers.dart';
+import 'package:elancer_api/models/students.dart';
 import 'package:flutter/material.dart';
 
 import '../../widgets/app_text_field.dart';
@@ -9,13 +12,13 @@ class RegisterScreen extends StatefulWidget {
   State<RegisterScreen> createState() => _RegisterScreenState();
 }
 
-class _RegisterScreenState extends State<RegisterScreen> {
+class _RegisterScreenState extends State<RegisterScreen> with Helpers {
 
   late TextEditingController _nameEditingController ;
   late TextEditingController _emailEditingController ;
   late TextEditingController _passwordEditingController ;
 
-  String groupValue  = '';
+  String groupValue  = 'M';
 
   @override
   void initState() {
@@ -147,7 +150,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
               minimumSize: const Size(0, 50),
               backgroundColor: Colors.cyan,
             ),
-            onPressed: () {},
+            onPressed: () async => await performRegister(),
             child: const Text(
               'Register',
               style: TextStyle(
@@ -163,4 +166,38 @@ class _RegisterScreenState extends State<RegisterScreen> {
       ),
     );
   }
+
+  Future<void> performRegister()async{
+    if(checkData()){
+      await register();
+    }
+  }
+
+   bool checkData(){
+    if(_nameEditingController.text.isNotEmpty &&
+    _passwordEditingController.text.isNotEmpty &&
+    _passwordEditingController.text.isNotEmpty){
+      return true;
+    }
+    else{
+      showSnackBar(context: context, message: 'Enter required data !' , error: true);
+      return false;
+    }
+    }
+
+  Future<void> register()async{
+   bool status = await AuthApiController().register(context, students: students);
+   if(status) Navigator.pop(context);
+  }
+
+  Students get students{
+    Students students = Students();
+    students.fullName = _nameEditingController.text;
+    students.email = _emailEditingController.text;
+    students.password = _passwordEditingController.text;
+    students.gender = groupValue;
+    return students;
+  }
 }
+
+
