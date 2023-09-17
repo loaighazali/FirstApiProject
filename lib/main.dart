@@ -1,4 +1,7 @@
+import 'package:elancer_api/screens/auth/login_screen.dart';
+import 'package:elancer_api/screens/auth/register_screen.dart';
 import 'package:elancer_api/screens/categories_screen.dart';
+import 'package:elancer_api/screens/lunch_screen.dart';
 import 'package:elancer_api/screens/users_screen.dart';
 import 'package:flutter/material.dart';
 
@@ -13,9 +16,13 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
 
-      initialRoute: '/users_screen',
+      initialRoute: '/lunch_screen',
       routes: {
+        '/lunch_screen' : (context) =>const LunchScreen(),
+        '/login_screen' : (context) =>const LoginScreen(),
+        '/register_screen' : (context) =>const RegisterScreen(),
         '/users_screen' : (context) =>const UsersScreen(),
         '/categories_screen' : (context) =>const CategoriesScreen(),
       },
