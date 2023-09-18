@@ -10,6 +10,7 @@ class ApiSetting {
   static const login = _apiUrl + 'students/auth/login';
   static const logout = _apiUrl + 'students/auth/logout';
   static const forgetPassword = _apiUrl + 'auth/forget-password';
+  static const resetPassword = _apiUrl + 'students/auth/reset-password';
 
 
 }

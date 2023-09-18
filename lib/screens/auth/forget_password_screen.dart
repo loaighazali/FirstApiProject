@@ -1,4 +1,5 @@
 import 'package:elancer_api/helpers/helpers.dart';
+import 'package:elancer_api/screens/auth/reset_password.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -21,12 +22,18 @@ class _ForgetPasswordState extends State<ForgetPassword> with Helpers {
     super.initState();
     _emailEditingController = TextEditingController();
   }
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    _emailEditingController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        iconTheme: IconThemeData(color: Colors.white , size: 30),
+        iconTheme: IconThemeData(color: Colors.white, size: 30),
         backgroundColor: Colors.cyan,
         title: const Text(
           'Forget Password',
@@ -62,11 +69,9 @@ class _ForgetPasswordState extends State<ForgetPassword> with Helpers {
             controller: _emailEditingController,
             textInputType: TextInputType.emailAddress,
           ),
-
           const SizedBox(
             height: 50,
           ),
-
           ElevatedButton(
             style: ElevatedButton.styleFrom(
               minimumSize: const Size(0, 50),
@@ -107,5 +112,11 @@ class _ForgetPasswordState extends State<ForgetPassword> with Helpers {
       context,
       email: _emailEditingController.text,
     );
+     //if(status)
+      Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(
+            builder: (context) => ResetPassword(email: _emailEditingController.text),
+          ));
   }
 }
