@@ -1,3 +1,5 @@
+import 'package:elancer_api/api/controllers/auth_api_controller.dart';
+import 'package:elancer_api/helpers/helpers.dart';
 import 'package:elancer_api/widgets/app_text_field.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
@@ -9,10 +11,10 @@ class LoginScreen extends StatefulWidget {
   State<LoginScreen> createState() => _LoginScreenState();
 }
 
-class _LoginScreenState extends State<LoginScreen> {
+class _LoginScreenState extends State<LoginScreen> with Helpers {
   late TextEditingController _emailEditingController;
   late TextEditingController _passwordEditingController;
-  late TapGestureRecognizer _gestureRecognizer ;
+  late TapGestureRecognizer _gestureRecognizer;
 
   @override
   void initState() {
@@ -23,8 +25,8 @@ class _LoginScreenState extends State<LoginScreen> {
     _gestureRecognizer = TapGestureRecognizer();
     _gestureRecognizer.onTap = navigatorRegisterScreen;
   }
-  
-  void navigatorRegisterScreen(){
+
+  void navigatorRegisterScreen() {
     Navigator.pushNamed(context, '/register_screen');
   }
 
@@ -44,7 +46,7 @@ class _LoginScreenState extends State<LoginScreen> {
         physics: const NeverScrollableScrollPhysics(),
         padding: const EdgeInsetsDirectional.all(20),
         children: [
-         const SizedBox(
+          const SizedBox(
             height: 80,
           ),
           const Text(
@@ -85,7 +87,7 @@ class _LoginScreenState extends State<LoginScreen> {
               minimumSize: const Size(0, 50),
               backgroundColor: Colors.cyan,
             ),
-            onPressed: () {},
+            onPressed: () async => await performLogin(),
             child: const Text(
               'Login',
               style: TextStyle(
@@ -94,29 +96,54 @@ class _LoginScreenState extends State<LoginScreen> {
               ),
             ),
           ),
-
-          const SizedBox(height: 20,),
-
+          const SizedBox(
+            height: 20,
+          ),
           RichText(
             textAlign: TextAlign.center,
             text: TextSpan(
                 text: 'Don\'t have an account ?   ',
-              style:const TextStyle(
-                color: Colors.black,
-              ),
-              children: [
-                TextSpan(
-                  recognizer: _gestureRecognizer,
-                  text: 'Create Now! ',
-                  style: const TextStyle(
-                    color: Colors.cyan,
-                  )
+                style: const TextStyle(
+                  color: Colors.black,
                 ),
-              ]
-            ),
+                children: [
+                  TextSpan(
+                      recognizer: _gestureRecognizer,
+                      text: 'Create Now! ',
+                      style: const TextStyle(
+                        color: Colors.cyan,
+                      )),
+                ]),
           ),
         ],
       ),
     );
   }
+
+  Future<void> performLogin() async {
+    if (checkData()) {
+      await login();
+    }
+  }
+
+  bool checkData() {
+    if (_passwordEditingController.text.isNotEmpty &&
+        _passwordEditingController.text.isNotEmpty) {
+      return true;
+    } else {
+      showSnackBar(
+          context: context, message: 'Enter required data !', error: true);
+      return false;
+    }
+  }
+
+  Future<void> login() async {
+    bool status = await AuthApiController().login(
+      context,
+      email: _emailEditingController.text,
+      password: _passwordEditingController.text,
+    );
+    if (status) Navigator.pushReplacementNamed(context, '/users_screen');
+  }
+
 }

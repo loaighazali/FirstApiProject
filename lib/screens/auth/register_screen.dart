@@ -34,7 +34,7 @@ class _RegisterScreenState extends State<RegisterScreen> with Helpers {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.cyan,
-        iconTheme: const IconThemeData(size: 30 , color: Colors.black),
+        iconTheme: const IconThemeData(size: 30 , color: Colors.white),
         title: const Text(
           'Register',
           style: TextStyle(

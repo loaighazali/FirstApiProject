@@ -1,3 +1,4 @@
+import 'package:elancer_api/pref/shared_pref_controller.dart';
 import 'package:flutter/material.dart';
 
 class LunchScreen extends StatefulWidget {
@@ -13,8 +14,9 @@ class _LunchScreenState extends State<LunchScreen> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    Future.delayed(Duration(seconds: 3), () {
-      Navigator.pushReplacementNamed(context, '/login_screen');
+    String rout = SharedPrefController().loggedIn ? '/users_screen' : '/login_screen';
+    Future.delayed(const Duration(seconds: 3), () {
+      Navigator.pushReplacementNamed(context, rout);
     },);
   }
 

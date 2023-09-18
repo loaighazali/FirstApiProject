@@ -27,7 +27,15 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
-        title: const Text('Categories'),
+        iconTheme:const IconThemeData(color: Colors.white , size: 30),
+        backgroundColor: Colors.cyan,
+        title: const Text(
+          'Categories',
+          style: TextStyle(
+            color: Colors.white,
+            fontSize: 25
+          ),
+        ),
         centerTitle: true,
       ),
       body: FutureBuilder(
@@ -43,13 +51,13 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
               padding: EdgeInsetsDirectional.all(20),
               itemCount: _categories.length,
               gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 2, crossAxisSpacing: 10 , mainAxisSpacing: 10),
+                  crossAxisCount: 2, crossAxisSpacing: 10, mainAxisSpacing: 10),
               itemBuilder: (context, index) {
                 return Card(
                   elevation: 10,
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(15),
-                    side:const BorderSide(
+                    side: const BorderSide(
                       color: Colors.black,
                       width: 2,
                     ),
@@ -60,7 +68,8 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
                       children: [
                         CircleAvatar(
                           radius: 40,
-                          backgroundImage: NetworkImage(_categories[index].image),
+                          backgroundImage:
+                              NetworkImage(_categories[index].image),
                         ),
                         const SizedBox(
                           height: 30,

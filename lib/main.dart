@@ -1,3 +1,4 @@
+import 'package:elancer_api/pref/shared_pref_controller.dart';
 import 'package:elancer_api/screens/auth/login_screen.dart';
 import 'package:elancer_api/screens/auth/register_screen.dart';
 import 'package:elancer_api/screens/categories_screen.dart';
@@ -5,7 +6,9 @@ import 'package:elancer_api/screens/lunch_screen.dart';
 import 'package:elancer_api/screens/users_screen.dart';
 import 'package:flutter/material.dart';
 
-void main() {
+void main() async{
+  WidgetsFlutterBinding.ensureInitialized();
+  await SharedPrefController().initPref();
   runApp(const MyApp());
 }
 
