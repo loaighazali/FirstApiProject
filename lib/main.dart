@@ -3,6 +3,8 @@ import 'package:elancer_api/screens/auth/forget_password_screen.dart';
 import 'package:elancer_api/screens/auth/login_screen.dart';
 import 'package:elancer_api/screens/auth/register_screen.dart';
 import 'package:elancer_api/screens/categories_screen.dart';
+import 'package:elancer_api/screens/images/images_screen.dart';
+import 'package:elancer_api/screens/images/upload_image_screen.dart';
 import 'package:elancer_api/screens/lunch_screen.dart';
 import 'package:elancer_api/screens/users_screen.dart';
 import 'package:flutter/material.dart';
@@ -30,6 +32,8 @@ class MyApp extends StatelessWidget {
         '/forget_password' : (context) =>const ForgetPassword(),
         '/users_screen' : (context) =>const UsersScreen(),
         '/categories_screen' : (context) =>const CategoriesScreen(),
+        '/image_screen' : (context) =>const ImageScreen(),
+        '/upload_image_screen' : (context) =>const UploadImageScreen(),
       },
 
     );

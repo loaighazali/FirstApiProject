@@ -11,7 +11,7 @@ class UsersScreen extends StatefulWidget {
   State<UsersScreen> createState() => _UsersScreenState();
 }
 
-class _UsersScreenState extends State<UsersScreen> with Helpers{
+class _UsersScreenState extends State<UsersScreen> with Helpers {
   List<User> _users = <User>[];
   late Future<List<User>> _future;
 
@@ -27,31 +27,32 @@ class _UsersScreenState extends State<UsersScreen> with Helpers{
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.cyan,
-        iconTheme:const IconThemeData(color: Colors.white , size: 30),
+        iconTheme: const IconThemeData(color: Colors.white, size: 30),
         title: const Text(
           'Users',
-          style: TextStyle(
-            color: Colors.white,
-            fontSize: 25
-          ),
+          style: TextStyle(color: Colors.white, fontSize: 25),
         ),
-        centerTitle: true,
         actions: [
-
+          IconButton(
+            onPressed: () {
+              Navigator.pushNamed(context, '/image_screen');
+            },
+            icon: Icon(Icons.image),
+          ),
           IconButton(
             onPressed: () {
               Navigator.pushNamed(context, '/categories_screen');
             },
             icon: const Icon(Icons.category),
           ),
-
           IconButton(
             onPressed: () async {
-             bool logout =  await AuthApiController().logOut();
-             if(logout) {
-               Navigator.pushReplacementNamed(context, '/login_screen');
-               showSnackBar(context: context, message: 'Succssefully Logout :(');
-             }
+              bool logout = await AuthApiController().logOut();
+              if (logout) {
+                Navigator.pushReplacementNamed(context, '/login_screen');
+                showSnackBar(
+                    context: context, message: 'Succssefully Logout :(');
+              }
             },
             icon: const Icon(Icons.login_outlined),
           ),
