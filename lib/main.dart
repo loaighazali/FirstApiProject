@@ -1,4 +1,5 @@
 import 'package:elancer_api/pref/shared_pref_controller.dart';
+import 'package:elancer_api/screens/auth/forget_password_screen.dart';
 import 'package:elancer_api/screens/auth/login_screen.dart';
 import 'package:elancer_api/screens/auth/register_screen.dart';
 import 'package:elancer_api/screens/categories_screen.dart';
@@ -26,6 +27,7 @@ class MyApp extends StatelessWidget {
         '/lunch_screen' : (context) =>const LunchScreen(),
         '/login_screen' : (context) =>const LoginScreen(),
         '/register_screen' : (context) =>const RegisterScreen(),
+        '/forget_password' : (context) =>const ForgetPassword(),
         '/users_screen' : (context) =>const UsersScreen(),
         '/categories_screen' : (context) =>const CategoriesScreen(),
       },

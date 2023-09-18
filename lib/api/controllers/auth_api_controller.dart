@@ -9,7 +9,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:http/http.dart' as http;
 
 class AuthApiController with Helpers {
-
   Future<bool> register(BuildContext context,
       {required Students students}) async {
     var url = Uri.parse(ApiSetting.register);
@@ -24,7 +23,6 @@ class AuthApiController with Helpers {
       showSnackBar(
         context: context,
         message: jsonDecode(response.body)['message'],
-
       );
       return true;
     } else if (response.statusCode == 400) {
@@ -40,38 +38,62 @@ class AuthApiController with Helpers {
   Future<bool> login(BuildContext context,
       {required String email, required String password}) async {
     var url = Uri.parse(ApiSetting.login);
-    var response = await http.post(url, body: {
-      'email': email,
-      'password': password
-    });
+    var response =
+        await http.post(url, body: {'email': email, 'password': password});
 
     if (response.statusCode == 200) {
       var jesonOpject = jsonDecode(response.body)['object'];
       Students students = Students.fromJson(jesonOpject);
-       SharedPrefController().save(students: students);
+      SharedPrefController().save(students: students);
       showSnackBar(
           context: context, message: jsonDecode(response.body)['message']);
       return true;
-    }else if(response.statusCode == 400){
-    showSnackBar(context: context, message: jsonDecode(response.body)['message'] , error: true,);
-    return false ;
+    } else if (response.statusCode == 400) {
+      showSnackBar(
+        context: context,
+        message: jsonDecode(response.body)['message'],
+        error: true,
+      );
+      return false;
     }
-    return
-    false;
+    return false;
   }
 
-  Future<bool> logOut ()async{
+  Future<bool> logOut() async {
     var url = Uri.parse(ApiSetting.logout);
-    var response = await http.get(url,headers: {
-      HttpHeaders.authorizationHeader : SharedPrefController().token,
-      HttpHeaders.acceptHeader : 'application/json'
+    var response = await http.get(url, headers: {
+      HttpHeaders.authorizationHeader: SharedPrefController().token,
+      HttpHeaders.acceptHeader: 'application/json'
     });
 
-    if(response.statusCode == 200 || response.statusCode == 401){
+    if (response.statusCode == 200 || response.statusCode == 401) {
       SharedPrefController().clear();
       return true;
     }
-    return false ;
+    return false;
+  }
 
+  Future<bool> forgetPassword(BuildContext context,
+      {required String email}) async {
+    var url = Uri.parse(ApiSetting.forgetPassword);
+    var response = await http.post(url, body: {'email': email});
+
+    if (response.statusCode == 200) {
+      String code = jsonDecode(response.body)['code'];
+      print(code);
+      showSnackBar(context: context, message: code);
+      return true;
+    } else if (response.statusCode == 400) {
+      showSnackBar(
+          context: context, message: jsonDecode(response.body)['message']);
+      return false;
+    } else {
+      showSnackBar(
+        context: context,
+        message: 'Something went wrong, pleasetry again!',
+        error: true,
+      );
+    }
+    return false;
   }
 }

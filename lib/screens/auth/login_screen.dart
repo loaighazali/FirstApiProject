@@ -115,6 +115,18 @@ class _LoginScreenState extends State<LoginScreen> with Helpers {
                       )),
                 ]),
           ),
+
+          TextButton(
+            onPressed: () {
+              Navigator.pushNamed(context, '/forget_password');
+            },
+            child: const Text(
+              'Forget Password ?',
+              style: TextStyle(
+                color: Colors.cyan
+              ),
+            ),
+          ),
         ],
       ),
     );
@@ -145,5 +157,4 @@ class _LoginScreenState extends State<LoginScreen> with Helpers {
     );
     if (status) Navigator.pushReplacementNamed(context, '/users_screen');
   }
-
 }
