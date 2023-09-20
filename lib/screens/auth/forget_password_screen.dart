@@ -112,7 +112,7 @@ class _ForgetPasswordState extends State<ForgetPassword> with Helpers {
       context,
       email: _emailEditingController.text,
     );
-     //if(status)
+     if(status)
       Navigator.pushReplacement(
           context,
           MaterialPageRoute(
